@@ -1,22 +1,45 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Event Class.
  */
 package planner;
 
 import java.util.*;
 
-/**
- *
- * @author macbookretina2015
- */
 public class Event {
+
+    public String date;
+    public int start;
+    public int end;
+    public String eventName;
+    public String description;
+    
+    /**
+     * The full constructor with all possible attributes. 
+     */
     Event(String date, int start, int end, String eventName, String description) {
-        
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.eventName = eventName;
+        this.description = description;
     }
     
-    Event(Date date, int start, int end, String eventName) {
+    /**
+     * The constructor without description. 
+     */
+    Event(String date, int start, int end, String eventName) {
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.eventName = eventName;
+        this.description = "";
+    }
+    
+    /**
+     * Empty Constructor.
+     */
+    Event() {
         
     }
+   
 }
