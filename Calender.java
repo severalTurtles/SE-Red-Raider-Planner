@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 
-public class Calender 
+public class Calendar 
 {
-	Map <String, List> year;
-	public Calender()
+	private Map <String, List> year;
+	public Calendar(int y)
 	{
-		//assume 2020ce
+		y = 2020; //assume 2020ce
 		year = new HashMap<String, List>();
 		List<Day> jan = new ArrayList<Day>();
 		List<Day> feb = new ArrayList<Day>();
@@ -28,22 +28,22 @@ public class Calender
 		{
 			if(i < 31)
 			{
-				if(i < 30)
+				if(februaryAdd(y))
 				{
-					feb.add(new Day(i));
+					feb.add(new Day(2,i,y));
 				}
-				apr.add(new Day(i));
-				jun.add(new Day(i));
-				sep.add(new Day(i));
-				nov.add(new Day(i));
+				apr.add(new Day(4,i,y));
+				jun.add(new Day(6,i,y));
+				sep.add(new Day(9,i,y));
+				nov.add(new Day(11,i,y));
 			}
-			jan.add(new Day(i));
-			mar.add(new Day(i));
-			may.add(new Day(i));
-			jul.add(new Day(i));
-			aug.add(new Day(i));
-			oct.add(new Day(i));
-			dec.add(new Day(i));
+			jan.add(new Day(1,i,y));
+			mar.add(new Day(3,i,y));
+			may.add(new Day(5,i,y));
+			jul.add(new Day(7,i,y));
+			aug.add(new Day(8,i,y));
+			oct.add(new Day(10,i,y));
+			dec.add(new Day(12,i,y));
 		}
 		year.put("January", jan);
 		year.put("February",feb);
@@ -58,4 +58,22 @@ public class Calender
 		year.put("November", nov);
 		year.put("December", dec);
 	}
+	
+	private boolean februaryAdd(int y)
+	{
+		if(y % 4 == 0)
+		{
+			if (y % 100 == 0)
+			{
+				if(y % 400 == 0)
+				{
+					return true;
+				}
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
 }
+
