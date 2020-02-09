@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 
-public class Calender 
+public class Calendar 
 {
 	private Map <String, List> year;
 	public Calendar(int y)

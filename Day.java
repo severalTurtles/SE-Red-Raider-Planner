@@ -1,8 +1,6 @@
 package planner;
 
-import planner.Event;
-
-import java.util.ArrayList;
+import java.awt.Event;
 import java.util.List;
 
 public class Day 
@@ -22,7 +20,7 @@ public class Day
 		String m = String.format("%2d", month);
 		String y = String.format("%4d", year);
 		date = d + "/" + m + "/" + y;
-		ArrayList<Event> events = new ArrayList<Event>();
+		events = new List<Event>();
 	}
 	/**
 	 * @return "dd/mm/yyyy"
@@ -36,12 +34,11 @@ public class Day
 	 */
 	public void addEvent()
 	{
-		String data = ""; //take input
 		String name = ""; //take input
 		int start = -1; //take input
 		int finish = -1; //take input
 		String desc = ""; //take input
-		Event adder = new Event(date, start, finish, name, desc);
+		Event adder = new Event(start, finish, name, desc);
 		events.add(adder);
 	}
 	/**
@@ -50,7 +47,7 @@ public class Day
 	 */
 	public void editEvent(int index)
 	{
-		Event e = events.get(index);
+		Event e = events.get(i);
 		//ask edit name
 		e.editName("");
 		//ask edit start time
