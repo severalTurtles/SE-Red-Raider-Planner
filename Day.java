@@ -1,6 +1,6 @@
 package planner;
 
-import java.awt.Event;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Day 
@@ -20,10 +20,10 @@ public class Day
 		String m = String.format("%2d", month);
 		String y = String.format("%4d", year);
 		date = d + "/" + m + "/" + y;
-		events = new List<Event>();
+		events = new ArrayList<Event>();
 	}
 	/**
-	 * @return "dd/mm/yyyy"
+	 * @return dd/mm/yyyy
 	 */
 	public String getDate()
 	{
@@ -32,30 +32,61 @@ public class Day
 	/**
 	 * Asks user for information to add an event to this day
 	 */
-	public void addEvent()
+	public void addEvent(Event adder)
 	{
-		String name = ""; //take input
-		int start = -1; //take input
-		int finish = -1; //take input
-		String desc = ""; //take input
-		Event adder = new Event(start, finish, name, desc);
 		events.add(adder);
 	}
 	/**
-	 * Asks user for information to edit an event
-	 * @param index which event to edit
+	 * adds an event to this day given event parameters
+	 * @param start the event's start time
+	 * @param end the event's end time
+	 * @param name the event's name
+	 * @param desc a description for the event
 	 */
-	public void editEvent(int index)
+	public void addEvent(int start, int end, String name, String desc)
 	{
-		Event e = events.get(i);
-		//ask edit name
-		e.editName("");
-		//ask edit start time
-		e.editStart(-1);
-		//ask edit end time
-		e.editEnd(-1);
-		//ask edit description
-		e.editDescription("");
+		Event adder = new Event(start, end,  name, desc);
+		events.add(adder);
+	}
+	/**
+	 * Edits the name of the chosen event
+	 * @param index the event to edit
+	 * @param n the new name
+	 */
+	public void editEventName(int index, String n)
+	{
+		Event e = events.get(index);
+		e.editName(n);
+	}
+	/**
+	 * Edits the start time of the chosen event
+	 * @param index the event to edit
+	 * @param s the new start time
+	 */
+	public void editEventStart(int index, int s)
+	{
+		Event e = events.get(index);
+		e.editStartTime(s);
+	}
+	/**
+	 * Edits the end time of the chosen event
+	 * @param index the event to edit
+	 * @param n the new end time
+	 */
+	public void editEventEnd(int index, int n)
+	{
+		Event e = events.get(index);
+		e.editEndTime(n);
+	}
+	/** 
+	 * Edits the description of the chosen event
+	 * @param index the event to edit
+	 * @param d the new description
+	 */
+	public void editEventDesc(int index, String d)
+	{
+		Event e = events.get(index);
+		e.editDescription(d);
 	}
 	/**
 	 * Removes an event from the list
@@ -66,6 +97,15 @@ public class Day
 		events.remove(index);
 	}
 	/**
+	 * @return the list of events on this day
+	 */
+	public List<Event> getEvents()
+	{
+		return events;
+	}
+	
+	
+	/**
 	 * Returns "Events for dd/mm/yyyy" then a list of all the events
 	 */
 	public String toString()
@@ -73,9 +113,10 @@ public class Day
 		String today = "Events for " + date +" :\n";
 		for(int i = 0; i < events.size(); i++)
 		{
-			today += events.get(i).toString() + "\n";
+			today += "[" + i + "]" + "\t" + events.get(i).toString() + "\n";
 		}
 		return today;
 	}
 }
+
 
