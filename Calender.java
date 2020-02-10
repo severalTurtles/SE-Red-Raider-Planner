@@ -7,11 +7,14 @@ import java.util.ArrayList;
 
 public class Calendar 
 {
-	private Map <String, List> year;
+	private final String[] MONTHS = {"January","February","March","April",
+									"May","June","July","August",
+									"September","October","November","December"};
+	private Map <String, List<Day>> year;
 	public Calendar(int y)
 	{
 		y = 2020; //assume 2020ce
-		year = new HashMap<String, List>();
+		year = new HashMap<String, List<Day>>();
 		List<Day> jan = new ArrayList<Day>();
 		List<Day> feb = new ArrayList<Day>();
 		List<Day> mar = new ArrayList<Day>();
@@ -45,18 +48,18 @@ public class Calendar
 			oct.add(new Day(10,i,y));
 			dec.add(new Day(12,i,y));
 		}
-		year.put("January", jan);
-		year.put("February",feb);
-		year.put("March", mar);
-		year.put("April", apr);
-		year.put("May", may);
-		year.put("June", jun);
-		year.put("July", jul);
-		year.put("August", aug);
-		year.put("September", sep);
-		year.put("October", oct);
-		year.put("November", nov);
-		year.put("December", dec);
+		year.put(MONTHS[0], jan);
+		year.put(MONTHS[1],feb);
+		year.put(MONTHS[2], mar);
+		year.put(MONTHS[3], apr);
+		year.put(MONTHS[4], may);
+		year.put(MONTHS[5], jun);
+		year.put(MONTHS[6], jul);
+		year.put(MONTHS[7], aug);
+		year.put(MONTHS[8], sep);
+		year.put(MONTHS[9], oct);
+		year.put(MONTHS[10], nov);
+		year.put(MONTHS[11], dec);
 	}
 	
 	private boolean februaryAdd(int y)
@@ -74,6 +77,35 @@ public class Calendar
 			return true;
 		}
 		return false;
+	}
+	
+	public Day getDay(int month, int day)
+	{
+		if(month > 11 || month < 0)
+		{
+			return null;
+		}
+		Day d;
+		try
+		{
+			d = year.get(MONTHS[month-1]).get(day);
+		}
+		catch(IndexOutOfBoundsException i)
+		{
+			return null;
+		}
+		return d;
+	}
+	
+	public int editEventDay(int oldM, int oldD, int event, int newM, int newD)
+	{
+		Day remove = getDay(oldM, oldD);
+		Day adder = getDay(newM, newD);
+		List<Event> l = remove.getEvents();
+		Event e = l.get(event);
+		remove.deleteEvent(event);
+		adder.addEvent(e);
+		return 1;
 	}
 }
 
