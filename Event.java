@@ -58,29 +58,21 @@ public class Event {
     	return 1;
     }
     
-    /*
-    public static void main(String args[]) {
-        
-        // Testing addEvent function
-        Event testEvent1 = new Event();
-        testEvent1.addEvent("1900/22/11", 2, 8, "Wedding", "A old wedding in 1900");
-        
-        System.out.println(testEvent1.date);
-        System.out.println(testEvent1.start);
-        System.out.println(testEvent1.end);
-        System.out.println(testEvent1.eventName);
-        System.out.println(testEvent1.description);
-        System.out.println();
-        
-        // Testing editEvent function
-        Event testEvent2 = new Event("1998/20/12", 2, 4, "Classy Event", "blah blah blah");       
-        testEvent2.editEvent("date", "1998/20/08");
-        testEvent2.editEvent("description", "New description");
-        
-        System.out.println(testEvent2.date);
-        System.out.println(testEvent2.description);
-        
+   /**
+     * Returns s string describing this event
+     * [eventName]
+     * Starts at: [start time]
+     * Ends at: [end time]
+     * Event description: [description
+     */
+    public String toString()
+    {
+    	String total = "/t";
+    	total += eventName + "\n\t";
+    	total += "Starts at: " + start + "\n\t";
+    	total += "Ends at  : " + end + "\n\t";
+    	total += "Event description: " + description + "\n";
+    	return total;
     }
-    */
 
 }
