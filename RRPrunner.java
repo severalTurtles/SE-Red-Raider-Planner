@@ -15,8 +15,7 @@ public class RRPrunner {
 				+ "Omer Quershi\n"
 				+ "Brianna Rodriguez\n"
 				+ "Thomas Urech\n"
-				);
-		
+				);	
 	}
 }
 
