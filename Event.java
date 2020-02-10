@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Event {
 
+    public String date;
     public int start;
     public int end;
     public String eventName;
@@ -15,7 +16,8 @@ public class Event {
     /**
      * The full constructor with all possible attributes. 
      */
-    Event(int start, int end, String eventName, String description) {
+    Event(String date, int start, int end, String eventName, String description) {
+        this.date = date;
         this.start = start;
         this.end = end;
         this.eventName = eventName;
@@ -25,54 +27,96 @@ public class Event {
     /**
      * The constructor without description. 
      */
-    Event(int start, int end, String eventName) {
+    Event(String date, int start, int end, String eventName) {
+        this.date = date;
         this.start = start;
         this.end = end;
         this.eventName = eventName;
         this.description = "";
     }
     
-    public int editStartTime(int newStart)
-    {
-    	start = newStart;
-    	//return 0 if invalid start time
-    	return 1;
-    }
-    
-    public int editEndTime(int newEnd)
-    {
-    	end = newEnd;
-    	//return 0 if invalid end time
-    	return 1;
-    }
-    
-    public int editName(String newName)
-    {
-    	eventName = newName;
-    	return 1;
-    }
-    
-    public int editDescription(String newDescription)
-    {
-    	description = newDescription;
-    	return 1;
-    }
-    
-   /**
-     * Returns s string describing this event
-     * [eventName]
-     * Starts at: [start time]
-     * Ends at: [end time]
-     * Event description: [description
+    /**
+     * Empty Constructor.
      */
-    public String toString()
-    {
-    	String total = "/t";
-    	total += eventName + "\n\t";
-    	total += "Starts at: " + start + "\n\t";
-    	total += "Ends at  : " + end + "\n\t";
-    	total += "Event description: " + description + "\n";
-    	return total;
+    Event() {}
+    
+    
+    /**
+     * This function adds event attributes to event instance.
+     * 
+     * @pre The Event class was initialized empty.
+     */
+    public void addEvent(String date, int start, int end, String eventName, String description) {
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.eventName = eventName;
+        this.description = description;
     }
+    
+    public void addEvent(String date, int start, int end, String eventName) {
+        this.date = date;
+        this.start = start;
+        this.end = end;
+        this.eventName = eventName;
+    }
+    
+    /**
+     * This function takes a string input of what is being edited and
+     * edits the appropriate attribute with newAttributeValue. If no matching attribute then 
+     * 0 is returned for failure.
+     * 
+     * @param <T> The type of the attribute to edit.
+     * @param attributeToEdit The attribute to edit.
+     * @param newAttributeValue The value to edit attribute with.
+     * @return 1 for success, 0 for failure.
+     */
+    public <T> int editEvent(String attributeToEdit, T newAttributeValue) {
+        switch (attributeToEdit) {
+            case "date":
+                this.date = (String) newAttributeValue;
+                break;
+            case "start":
+                this.start = (Integer) newAttributeValue;
+                break;
+            case "end":
+                this.end = (Integer) newAttributeValue;
+                break;
+            case "eventName":
+                this.eventName = (String) newAttributeValue;
+                break;
+            case "description": 
+                this.description = (String) newAttributeValue;
+            default:
+                return 0;
+        }
+        
+        return 1;
+    }
+    
+    /*
+    public static void main(String args[]) {
+        
+        // Testing addEvent function
+        Event testEvent1 = new Event();
+        testEvent1.addEvent("1900/22/11", 2, 8, "Wedding", "A old wedding in 1900");
+        
+        System.out.println(testEvent1.date);
+        System.out.println(testEvent1.start);
+        System.out.println(testEvent1.end);
+        System.out.println(testEvent1.eventName);
+        System.out.println(testEvent1.description);
+        System.out.println();
+        
+        // Testing editEvent function
+        Event testEvent2 = new Event("1998/20/12", 2, 4, "Classy Event", "blah blah blah");       
+        testEvent2.editEvent("date", "1998/20/08");
+        testEvent2.editEvent("description", "New description");
+        
+        System.out.println(testEvent2.date);
+        System.out.println(testEvent2.description);
+        
+    }
+    */
 
 }

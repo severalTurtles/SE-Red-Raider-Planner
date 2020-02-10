@@ -1,6 +1,6 @@
 package planner;
 
-import java.util.ArrayList;
+import java.awt.Event;
 import java.util.List;
 
 public class Day 
@@ -20,10 +20,10 @@ public class Day
 		String m = String.format("%2d", month);
 		String y = String.format("%4d", year);
 		date = d + "/" + m + "/" + y;
-		events = new ArrayList<Event>();
+		events = new List<Event>();
 	}
 	/**
-	 * @return dd/mm/yyyy
+	 * @return "dd/mm/yyyy"
 	 */
 	public String getDate()
 	{
@@ -32,42 +32,30 @@ public class Day
 	/**
 	 * Asks user for information to add an event to this day
 	 */
-	public void addEvent(Event adder)
+	public void addEvent()
 	{
-		events.add(adder);
-	}
-	
-	public void addEvent(int start, int end, String name, String desc)
-	{
-		Event adder = new Event(start, end,  name, desc);
+		String name = ""; //take input
+		int start = -1; //take input
+		int finish = -1; //take input
+		String desc = ""; //take input
+		Event adder = new Event(start, finish, name, desc);
 		events.add(adder);
 	}
 	/**
 	 * Asks user for information to edit an event
 	 * @param index which event to edit
 	 */
-	public void editEventName(int index, String n)
+	public void editEvent(int index)
 	{
-		Event e = events.get(index);
-		e.editName(n);
-	}
-	
-	public void editEventStart(int index, int s)
-	{
-		Event e = events.get(index);
-		e.editStartTime(s);
-	}
-	
-	public void editEventEnd(int index, int n)
-	{
-		Event e = events.get(index);
-		e.editEndTime(n);
-	}
-	
-	public void editEventDesc(int index, String d)
-	{
-		Event e = events.get(index);
-		e.editDescription(d);
+		Event e = events.get(i);
+		//ask edit name
+		e.editName("");
+		//ask edit start time
+		e.editStart(-1);
+		//ask edit end time
+		e.editEnd(-1);
+		//ask edit description
+		e.editDescription("");
 	}
 	/**
 	 * Removes an event from the list
@@ -77,13 +65,6 @@ public class Day
 	{
 		events.remove(index);
 	}
-	
-	public List<Event> getEvents()
-	{
-		return events;
-	}
-	
-	
 	/**
 	 * Returns "Events for dd/mm/yyyy" then a list of all the events
 	 */
@@ -92,8 +73,9 @@ public class Day
 		String today = "Events for " + date +" :\n";
 		for(int i = 0; i < events.size(); i++)
 		{
-			today += "[" + i + "]" + "\t" + events.get(i).toString() + "\n";
+			today += events.get(i).toString() + "\n";
 		}
 		return today;
 	}
 }
+
