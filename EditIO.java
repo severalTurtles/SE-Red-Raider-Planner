@@ -17,7 +17,11 @@ public class EditIO
 		do
 		{
 			y = getDay(scan,c);
-			chooseEvent(scan, c, y);
+			if(y != null)
+			{
+				chooseEvent(scan, c, y);
+			}
+			
 		}
 		while(y != null);
 	}
@@ -25,13 +29,16 @@ public class EditIO
 	{
 		boolean continueGet = true;
 		Day get = null;
+		System.out.println("Get date: (-1 to quit)");
 		while(continueGet)
 		{
 			continueGet = false;
 			int m = 13;
 			try
 			{
+				System.out.print("Month (number): ");
 				m = scan.nextInt();
+				System.out.println(m);
 			}
 			catch(InputMismatchException exc)
 			{
