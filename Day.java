@@ -23,12 +23,27 @@ public class Day
 		events = new ArrayList<Event>();
 	}
 	/**
-	 * @return dd/mm/yyyy
+	 * @return mm/dd/yyyy
 	 */
 	public String getDate()
 	{
 		return date;
 	}
+	
+	public int getMonth()
+	{
+		String partial = date.substring(0,2);
+		partial = partial.trim();
+		return Integer.parseInt(partial);
+	}
+	
+	public int getDay()
+	{
+		String partial = date.substring(3,5);
+		partial = partial.trim();
+		return Integer.parseInt(partial);
+	}
+	
 	/**
 	 * Asks user for information to add an event to this day
 	 */
