@@ -1,5 +1,7 @@
 package planner;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CalendarIO {
@@ -32,12 +34,54 @@ public class CalendarIO {
 			
 			for(int j = 1; j <= days; j++) {
 				Day d = c.getDay(i, j);
-				for(List<Event> e: d.getEvents()) {
+				for(Event e: d.getEvents()) {
 					System.out.println(e);
 				}
 			}
 		}
 		
+	}
+
+	public static void viewWeek(Scanner s, Calendar c, int startMonth, int startDay) {
+		int overflowDay = 1;
+		Map<Integer, Integer> month_days = new HashMap<Integer,Integer>();
+		month_days.put(1,31);
+		month_days.put(2,29);
+		month_days.put(3,31);
+		month_days.put(4,30);
+		month_days.put(5,31);
+		month_days.put(6,30);
+		month_days.put(7,31);
+		month_days.put(8,31);
+		month_days.put(9,30);
+		month_days.put(10,31);
+		month_days.put(11,30);
+		month_days.put(12,31);
+
+		for(int i = 0; i < 7; i++) {
+			// if the day to be displayed has yet to flow into the next month
+			if(startDay + i <= (int)month_days.get(startMonth)) {
+
+				Day d = c.getDay(startMonth, startDay + i);
+				// print the day's events
+				for(Event e: d.getEvents()) {
+					System.out.println("Events for " + startMonth + "/" + (startDay+i));
+					System.out.println(e);
+				}
+
+			}
+			// if the day to display has gone to the next month, but not the next year
+			else if (startMonth + 1 <= 12) {
+				Day d = c.getDay(startMonth + 1, overflowDay);
+				// print the day's events
+				for(Event e: d.getEvents()) {
+					System.out.println("Events for " + (startMonth+1) + "/" + (overflowDay));
+					System.out.println(e);
+				}
+				overflowDay++;
+			}
+		}
+
 	}
 
 }
