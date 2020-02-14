@@ -1,6 +1,7 @@
 package planner;
 
 import java.util.Scanner;
+import java.util.List;
 
 public class CalendarIO {
 
@@ -32,7 +33,7 @@ public class CalendarIO {
 			
 			for(int j = 1; j <= days; j++) {
 				Day d = c.getDay(i, j);
-				for(List<Event> e: d.getEvents()) {
+				for(Event e: d.getEvents()) {
 					System.out.println(e);
 				}
 			}
