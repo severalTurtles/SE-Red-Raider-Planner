@@ -67,7 +67,7 @@ public class Event {
      */
     public String toString()
     {
-    	String total = "/t";
+    	String total = "\t";
     	total += eventName + "\n\t";
     	total += "Starts at: " + start + "\n\t";
     	total += "Ends at  : " + end + "\n\t";
