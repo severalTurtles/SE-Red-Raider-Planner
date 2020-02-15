@@ -72,12 +72,16 @@ public class CalendarIO {
 		for(int i = 0; i < 7; i++) {
 			// if the day to be displayed has yet to flow into the next month
 			if(startDay + i <= (int)month_days.get(startMonth)) {
-
-				Day d = c.getDay(startMonth, startDay + i);
-				// print the day's events
-				for(Event e: d.getEvents()) {
-					System.out.println("Events for " + startMonth + "/" + (startDay+i));
-					System.out.println(e);
+				
+				try {
+					Day d = c.getDay(startMonth, startDay + i);
+					// print the day's events
+					for(Event e: d.getEvents()) {
+						System.out.println("Events for " + startMonth + "/" + (startDay+i));
+						System.out.println(e);
+					}
+				} catch(Exception e) {
+					//
 				}
 
 			}
