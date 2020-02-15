@@ -136,7 +136,7 @@ public class EditIO
 				case 2: editStart(scan, y,pick); edit = -1; break;
 				case 3: editEnd(scan, y,pick); edit = -1; break;
 				case 4: editDescription(scan, y,pick); edit = -1; break;
-				case 5: y = editDay(scan, cal,y ,pick); 
+				case 5: editDay(scan, cal,y ,pick); 
 				System.out.println("Now in " + y.getDate());
 				edit = -1; break;
 				case 6: edit = 0; break;
@@ -155,10 +155,10 @@ public class EditIO
 	 * @param day the old day
 	 * @param pick the event's position in that day
 	 */
-	private static Day editDay(Scanner scan, Calendar c, Day oldDay, int pick) {
+	private static void editDay(Scanner scan, Calendar c, Day oldDay, int pick) {
 		// TODO Auto-generated method stub
 		Day newDay = getDay(scan,c);
-		return c.editEventDay(oldDay.getMonth(), oldDay.getDay(), pick, newDay.getMonth(), newDay.getDay());
+		c.editEventDay(oldDay.getMonth(), oldDay.getDay(), pick, newDay.getMonth(), newDay.getDay());
 	}
 	/**
 	 * lets the user edit the description of an event
@@ -212,4 +212,4 @@ public class EditIO
 		String newName = scan.nextLine();
 		y.editEventName(pick, newName);
 	}
-}
+}//
