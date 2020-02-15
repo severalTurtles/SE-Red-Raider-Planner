@@ -34,9 +34,13 @@ public class CalendarIO {
 			}
 			
 			for(int j = 1; j <= days; j++) {
-				Day d = c.getDay(i, j);
-				for(Event e: d.getEvents()) {
-					System.out.println(e);
+				try {
+					Day d = c.getDay(i, j);
+					for(Event e: d.getEvents()) {
+						System.out.println(e);
+					}
+				} catch(Exception e) {
+					//
 				}
 			}
 		}
