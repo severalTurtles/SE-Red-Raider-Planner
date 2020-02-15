@@ -1,5 +1,7 @@
 package planner;
 
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class EditIO 
@@ -11,35 +13,140 @@ public class EditIO
 	 */
 	public static void editCalendar(Scanner scan, Calendar c)
 	{
-		System.out.println("Pick a day to edit");
-		System.out.print("Month (number): ");
-		int m = scan.nextInt();
-		System.out.print("Day (number): ");
-		int d = scan.nextInt();
-		Day y = c.getDay(m, d);
-		System.out.printf("\n\n%s\n",y.toString());
-		System.out.println("Which would you like to pick? ");
-		int pick = scan.nextInt();
-		Event e = y.getEvents().get(pick);
-		System.out.printf("[1] Name\t\t\tcurrent name: %s\n"
-				+ "[2] Start Time\t\tcurrent start: %d\n"
-				+ "[3] End Time\t\tcurrent end: %d\n"
-				+ "[4] Description\t\tcurrent description: %s"
-				+ "[5] Event Date\t\tcurrent day: %s", 
-				e.eventName, e.start, e.end, e.description, y.getDate());
-		System.out.println("Which attribute would you like to change?");
-		int edit = scan.nextInt();
-		switch (edit)
+		Day y = null;
+		do
 		{
-		case 1: editName(scan, y,pick); break;
-		case 2: editStart(scan, y,pick); break;
-		case 3: editEnd(scan, y,pick); break;
-		case 4: editDescription(scan, y,pick); break;
-		case 5: editDay(scan, c, m, d ,pick); break;
-		default: System.out.println("Invalid input");
+			y = getDay(scan,c);
+			if(y != null)
+			{
+				chooseEvent(scan, c, y);
+			}
+			
 		}
-		
+		while(y != null);
 	}
+	public static Day getDay(Scanner scan, Calendar c)
+	{
+		boolean continueGet = true;
+		Day get = null;
+		System.out.println("Get date: (-1 to quit)");
+		while(continueGet)
+		{
+			continueGet = false;
+			int m = 13;
+			try
+			{
+				System.out.print("Month (number): ");
+				m = scan.nextInt();
+				System.out.println(m);
+			}
+			catch(InputMismatchException exc)
+			{
+				scan.nextLine();
+			}
+			if(m < 1)
+			{
+				return null;
+			}
+			else if(m > 12)
+			{
+				System.out.println("Invalid month");
+				continueGet = true;
+			}
+			else
+			{
+				int d = -1;
+				try
+				{
+					System.out.print("Day (number): ");
+					d = scan.nextInt();
+				}
+				catch(InputMismatchException exc)
+				{
+					scan.nextLine();
+				}
+				get = c.getDay(m,d);
+				if(get == null)
+				{
+					System.out.println("Invalid day");
+					continueGet = true;
+				}
+			}	
+		}
+		return get;
+	}
+	public static void chooseEvent(Scanner scan, Calendar cal, Day y)
+	{
+		boolean continueEvent = true;
+		while(continueEvent)
+		{
+			int size = y.getEvents().size();
+			System.out.println("Which would you like to pick? (-1 to exit)");
+			System.out.printf("\n%s",y.toString());
+			System.out.printf("[%d] Pick another day\n", size);
+			int pick = -1;
+			int edit = -1;
+			Event e = null;
+			try
+			{
+				pick = scan.nextInt();
+				if(pick >= size)
+				{
+					continueEvent = false;
+				}
+				else
+				{
+					e = y.getEvents().get(pick);
+				}
+			}
+			catch(IndexOutOfBoundsException exc)
+			{
+				System.out.println("Invalid Input");
+				scan.nextLine();
+				edit = 0;
+			}
+			catch(InputMismatchException exc)
+			{
+				System.out.println("Invalid Input");
+				scan.nextLine();
+				edit = 0;
+			}
+			while(edit == -1 && continueEvent == true)
+			{
+				System.out.printf("[1] Name\t\tcurrent name: %s\n"
+						+ "[2] Start Time\t\tcurrent start: %d\n"
+						+ "[3] End Time\t\tcurrent end: %d\n"
+						+ "[4] Description\t\tcurrent description: %s\n"
+						+ "[5] Event Date\t\tcurrent day: %s\n"
+						+ "[6] Edit different event\n", 
+						e.eventName, e.start, e.end, e.description, y.getDate());
+				try
+				{
+					System.out.println("Which attribute would you like to change?");
+					edit = scan.nextInt();
+					
+				}
+				catch(InputMismatchException exc)
+				{
+					scan.nextLine();
+				}
+				switch (edit)
+				{
+				case 1: editName(scan, y,pick); edit = -1; break;
+				case 2: editStart(scan, y,pick); edit = -1; break;
+				case 3: editEnd(scan, y,pick); edit = -1; break;
+				case 4: editDescription(scan, y,pick); edit = -1; break;
+				case 5: y = editDay(scan, cal,y ,pick); 
+				System.out.println("Now in " + y.getDate());
+				edit = -1; break;
+				case 6: edit = 0; break;
+				default: System.out.println("Invalid input"); edit = -1; break;
+				}
+			}
+			
+		}
+	}
+	
 	/**
 	 * Lets user edit the day of an event
 	 * @param scan the IO scanner
@@ -48,13 +155,10 @@ public class EditIO
 	 * @param day the old day
 	 * @param pick the event's position in that day
 	 */
-	private static void editDay(Scanner scan, Calendar c, int month, int day, int pick) {
+	private static Day editDay(Scanner scan, Calendar c, Day oldDay, int pick) {
 		// TODO Auto-generated method stub
-		System.out.println("Enter the new month (number): ");
-		int newM = scan.nextInt();
-		System.out.println("Enter the new Day (number): ");
-		int newD = scan.nextInt();
-		c.editEventDay(month, day, pick, newM, newD);
+		Day newDay = getDay(scan,c);
+		return c.editEventDay(oldDay.getMonth(), oldDay.getDay(), pick, newDay.getMonth(), newDay.getDay());
 	}
 	/**
 	 * lets the user edit the description of an event
@@ -64,9 +168,10 @@ public class EditIO
 	 */
 	private static void editDescription(Scanner scan, Day y, int pick) 
 	{
-		System.out.println("Enter the new description: ");
+		System.out.println("Enter the new description: \n");
+		scan.nextLine();
 		String newDesc = scan.nextLine();
-		y.editEventName(pick, newDesc);
+		y.editEventDesc(pick, newDesc);
 		
 	}
 	/**
@@ -103,6 +208,7 @@ public class EditIO
 	private static void editName(Scanner scan, Day y, int pick)
 	{
 		System.out.println("Enter the new name: ");
+		scan.nextLine();
 		String newName = scan.nextLine();
 		y.editEventName(pick, newName);
 	}
