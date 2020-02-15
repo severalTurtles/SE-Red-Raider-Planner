@@ -43,7 +43,13 @@ public class CalendarIO {
 		
 	}
 
-	public static void viewWeek(Scanner s, Calendar c, int startMonth, int startDay) {
+	public static void viewWeek(Scanner s, Calendar c) {
+		System.out.println("Enter a start date to display the week's events.");
+		System.out.print("Month (1-12):");
+		int startMonth = s.nextInt();
+		System.out.print("Day (0-31):");
+		int startDay = s.nextInt();
+
 		int overflowDay = 1;
 		Map<Integer, Integer> month_days = new HashMap<Integer,Integer>();
 		month_days.put(1,31);
