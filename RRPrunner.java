@@ -14,8 +14,8 @@ public class RRPrunner {
 	{
 		Scanner scan = new Scanner(System.in);
 		Calendar cal = new Calendar(2020);
-		Day t1 = cal.getDay(1, 1);
-		Day t2 = cal.getDay(1, 31);
+		Day t1 = cal.getDay(1, 30);
+		Day t2 = cal.getDay(1, 29);
 		Day t3 = cal.getDay(2, 1);
 		Day t4 = cal.getDay(2, 29);
 		t1.addEvent(0, 30, "event1", "Happy new year");
