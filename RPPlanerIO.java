@@ -36,11 +36,11 @@ public class RPPlanerIO
 			}
 			switch(inputA)
 			{
-			case 1: /*AddIO.addEvent(scan,cal);*/ break;
+			case 1: addIO.addEvent(scan,cal); break;
 			case 2: EditIO.editCalendar(scan,cal); break;
-			case 3: /*DeleteIO.deleteEvent(scan,cal);*/ break;
-			case 4: /*WeekIO.viewWeek(scan,cal);*/ break;
-			case 5: /*CalendarIO.viewCalendar(scan,cal);*/ break;
+			case 3: RemoveIO.removeEvent(scan,cal); break;
+			case 4: CalendarIO.viewWeek(scan,cal); break;
+			case 5: CalendarIO.viewCalendar(scan,cal); break;
 			case 6: goOn = false; break;
 			default: System.out.println("invalid input");
 			}
