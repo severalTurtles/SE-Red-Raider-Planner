@@ -3,6 +3,8 @@
  */
 package planner;
 
+import java.util.Scanner;
+
 /**
  * @author tfure
  *
