@@ -20,9 +20,9 @@ public class RPPlanerIO
 		{
 			System.out.println("What would you like to do?");
 			System.out.println("[1] Add event");
-			System.out.println("[2] Edit event");
+			System.out.println("[2] Edit/view event");
 			System.out.println("[3] Delete event");
-			System.out.println("[4] Show this week's events");
+			System.out.println("[4] Show certain week's events");
 			System.out.println("[5] Show Calendar");
 			System.out.println("[6] Exit");
 			int inputA = -1;
@@ -48,3 +48,4 @@ public class RPPlanerIO
 		
 	}
 }
+
