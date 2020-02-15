@@ -1,2 +1,2 @@
 # Red Raider Planner
-There are a few days set up as test days, viewing 
+In order to run properly, all .java files must be in a package named planner
