@@ -13,9 +13,10 @@ public class addIO
 	{
 		System.out.println("\nNew Event Creation:  \nWhat Day is your event?");
 		System.out.print("Month (number): ");
-		int m = Integer.parseInt(scan.nextLine());
+		int m = scan.nextInt();
 		System.out.print("Day (number): ");
-		int d = Integer.parseInt(scan.nextLine());
+		int d = scan.nextInt();
+		scan.nextLine();
 		Day y = c.getDay(m, d);
 		System.out.println("Enter Event Name: ");
 		String name = scan.nextLine();
