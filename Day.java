@@ -23,7 +23,7 @@ public class Day
 		events = new ArrayList<Event>();
 	}
 	/**
-	 * @return dd/mm/yyyy
+	 * @return mm/dd/yyyy
 	 */
 	public String getDate()
 	{
