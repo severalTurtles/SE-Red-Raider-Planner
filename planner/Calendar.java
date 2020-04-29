@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 public class Calendar 
 {
-	private final String[] MONTHS = {"January","February","March","April",
-									"May","June","July","August",
-									"September","October","November","December"};
-	private Map <String, List<Day>> year;
-	public Calendar(int y)
-	{
-		y = 2020; //assume 2020ce
+        // SINGLETON PATTERN
+    
+        //create an object of Calendar
+        private static Calendar instance = new Calendar();
+
+        //make the constructor private so that this class cannot be
+        //instantiated
+        private Calendar() {
+            		int y = 2020; //assume 2020ce
 		year = new HashMap<String, List<Day>>();
 		List<Day> jan = new ArrayList<Day>();
 		List<Day> feb = new ArrayList<Day>();
@@ -60,7 +62,17 @@ public class Calendar
 		year.put(MONTHS[9], oct);
 		year.put(MONTHS[10], nov);
 		year.put(MONTHS[11], dec);
-	}
+        }
+
+        //Get the only object available
+        public static Calendar getInstance(){
+           return instance;
+        }
+        
+	private final String[] MONTHS = {"January","February","March","April",
+									"May","June","July","August",
+									"September","October","November","December"};
+	private Map <String, List<Day>> year;
 	
 	private boolean februaryAdd(int y)
 	{
