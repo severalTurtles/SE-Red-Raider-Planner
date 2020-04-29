@@ -13,7 +13,7 @@ public class RRPrunner {
 	public static void main(String args[])
 	{
 		Scanner scan = new Scanner(System.in);
-		Calendar cal = new Calendar(2020);
+		Calendar cal = Calendar.getInstance();
 		Day t1 = cal.getDay(1, 30);
 		Day t2 = cal.getDay(1, 29);
 		Day t3 = cal.getDay(2, 1);
@@ -24,7 +24,7 @@ public class RRPrunner {
 		t2.addEvent(0, 2359, "event4", "Happy Birthday James");
 		t3.addEvent(1600, 2000, "event5", "I hope Mahomes wins the Super Bowl");
 		t4.addEvent(800, 2000, "event6", "Wait it isn't March?");
-		RPPlanerIO runner = new RPPlanerIO(scan,cal);
+		RPPlanerIO runner = new RPPlanerIO(scan, cal);
 		runner.run();	
 	}
 }
